@@ -8,15 +8,23 @@ use serenity::{
 
 struct Handler;
 
+fn who(user: &String, command: &String) {
+    println!("{} issued {}", user, command)
+}
+
 #[async_trait]
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
         if !msg.author.bot {
             if msg.content == "honk" {
+                who(&msg.author.name, &msg.content);
+
                 if let Err(why) = msg.channel_id.say(&ctx.http, "honk").await {
                     println!("Error sending message: {:?}", why);
                 }
             } else if msg.content == "bonk" {
+                who(&msg.author.name, &msg.content);
+
                 if let Err(why) = msg.channel_id.say(&ctx.http, "bonk").await {
                     println!("Error sending message: {:?}", why);
                 }
