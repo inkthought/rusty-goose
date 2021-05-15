@@ -16,13 +16,13 @@ fn who(user: &String, command: &String) {
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
         if !msg.author.bot {
-            if msg.content == "honk" {
+            if msg.content.contains("honk") {
                 who(&msg.author.name, &msg.content);
 
                 if let Err(why) = msg.channel_id.say(&ctx.http, "honk").await {
                     println!("Error sending message: {:?}", why);
                 }
-            } else if msg.content == "bonk" {
+            } else if msg.content.contains("bonk") {
                 who(&msg.author.name, &msg.content);
 
                 if let Err(why) = msg.channel_id.say(&ctx.http, "bonk").await {
